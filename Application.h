@@ -23,7 +23,13 @@ class Application {
 private:
     static constexpr int MS_PER_UPDATE = 3;
 
+    // A set of coords denoting turned on tiles on the field to make drawing quicker
+    // This set is shared with
+    // - Field class, which adds turned on tiles to the set, and removes turned off tiles
+    // - Drawer class, which draws turned on tiles
+
     std::shared_ptr< std::set<Coords> > m_black_tiles;
+
     AntManager m_manager;
     std::shared_ptr<Field> m_field;
     Drawer m_drawer;

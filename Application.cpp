@@ -2,7 +2,7 @@
 // Created by Balajanovski on 18/11/2017.
 //
 
-#include <SDL2/SDL.h>
+#include "Util/GetSDL.h"
 
 #include "Application.h"
 
@@ -57,10 +57,15 @@ void Application::begin() {
         lag += elapsed;
         check_keyboard_events();
 
-        while (lag >= MS_PER_UPDATE) {
-            m_manager.iterate();
-            lag -= MS_PER_UPDATE;
-        }
+
+            while (lag >= MS_PER_UPDATE) {
+                if (m_state == ApplicationState::RUNNING) {
+                    m_manager.iterate();
+                }
+                lag -= MS_PER_UPDATE;
+            }
+
+
 
         m_drawer.flush();
     }

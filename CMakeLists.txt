@@ -7,7 +7,7 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}")
 
 find_package(SDL2 REQUIRED)
 
-set(SOURCE_FILES main.cpp Util/Coords.cpp Util/Cleanup.h Util/RandomNumberGen.cpp Ant.cpp AntManager.cpp Application.cpp Drawer.cpp Field.cpp )
+set(SOURCE_FILES main.cpp Util/Coords.cpp Util/Cleanup.h Util/RandomNumberGen.cpp Ant.cpp AntManager.cpp Application.cpp Drawer.cpp Field.cpp Util/GetSDL.h)
 add_executable(${CMAKE_PROJECT_NAME} ${SOURCE_FILES})
 include_directories(${SDL2_INCLUDE_DIR})
 target_link_libraries(${CMAKE_PROJECT_NAME} ${SDL2_LIBRARY})

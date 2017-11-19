@@ -1,7 +1,7 @@
 #ifndef LANGTON_DRAWER_H
 #define LANGTON_DRAWER_H
 
-#include <SDL2/SDL.h>
+#include "Util/GetSDL.h"
 
 #include "Util/Cleanup.h"
 #include "Util/Coords.h"
