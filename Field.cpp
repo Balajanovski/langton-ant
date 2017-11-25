@@ -5,13 +5,14 @@
 #include <memory>
 #include <algorithm>
 #include <stdexcept>
+#include <utility>
 
 #include "Field.h"
 
-Field::Field(int width, int height, std::shared_ptr< std::set<Coords> > black_tiles) : m_field_mem(height),
-                                                                                       m_width(width),
-                                                                                       m_height(height),
-                                                                                       m_black_tiles(black_tiles) {
+Field::Field(int width, int height, std::shared_ptr< std::set< std::pair<Coords, RGB> > > colored_tiles) : m_field_mem(height),
+                                                                                                           m_width(width),
+                                                                                                           m_height(height),
+                                                                                                           m_colored_tiles(colored_tiles) {
     // Create "template" row of only white tiles to fill up the memory
     std::vector<TileState> white_row(width);
     std::fill_n(white_row.begin(), width, TileState::WHITE);
@@ -20,18 +21,18 @@ Field::Field(int width, int height, std::shared_ptr< std::set<Coords> > black_ti
     std::fill_n(m_field_mem.begin(), height, white_row);
 }
 
-void Field::flip_tile(const Coords& c) {
-    switch(m_field_mem[c.y][c.x]) {
+void Field::flip_tile(const std::pair<Coords, RGB> &c) {
+    switch(m_field_mem[c.first.y][c.first.x]) {
         case TileState::WHITE:
         {
-            m_field_mem[c.y][c.x] = TileState::BLACK;
-            m_black_tiles->insert(c);
+            m_field_mem[c.first.y][c.first.x] = TileState::BLACK;
+            m_colored_tiles->insert(c);
         }
             break;
         case TileState::BLACK:
         {
-            m_field_mem[c.y][c.x] = TileState::WHITE;
-            m_black_tiles->erase(c);
+            m_field_mem[c.first.y][c.first.x] = TileState::WHITE;
+            m_colored_tiles->erase(c);
         }
             break;
         default:

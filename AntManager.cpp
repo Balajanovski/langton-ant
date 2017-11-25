@@ -3,7 +3,7 @@
 //
 
 #include <iostream>
-#include <algorithm>
+#include <utility>
 
 #include "Util/Coords.h"
 #include "Util/RandomNumberGen.h"
@@ -12,6 +12,7 @@
 AntManager::AntManager(std::shared_ptr<Field> field) : m_field(field) { }
 
 void AntManager::iterate() {
+
     for (auto &a : m_ants) {
         move_ant(a);
     }
@@ -37,14 +38,14 @@ void AntManager::move_ant(Ant &ant) {
         case TileState::WHITE:
         {
             ant.rotate_right();
-            m_field->flip_tile(ant.get_coords());
+            m_field->flip_tile(std::make_pair(ant.get_coords(), ant.get_color()));
             ant.move(m_field->get_field_width(), m_field->get_field_height());
         }
             break;
         case TileState::BLACK:
         {
             ant.rotate_left();
-            m_field->flip_tile(ant.get_coords());
+            m_field->flip_tile(std::make_pair(ant.get_coords(), ant.get_color()));
             ant.move(m_field->get_field_width(), m_field->get_field_height());
         }
             break;

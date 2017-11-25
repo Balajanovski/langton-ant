@@ -5,17 +5,17 @@
 
 #include "Util/Cleanup.h"
 #include "Util/Coords.h"
+#include "Util/RGB.h"
 
 #include <set>
 #include <memory>
 
-// Size in pixels of a cell
-constexpr static int CELL_SIZE = 10;
+// Width of grid lines
 constexpr static int LINE_WIDTH = 1;
 
 class Drawer : private SdlHandle {
 public:
-    Drawer(int x, int y, std::shared_ptr< std::set<Coords> > black_tiles);
+    Drawer(int x, int y, int cell_size, std::shared_ptr< std::set< std::pair<Coords, RGB> > > colored_tiles);
 
     void flush();
 private:
@@ -25,7 +25,11 @@ private:
     SdlWinPtr window;
     SdlRenPtr renderer;
 
-    std::shared_ptr< std::set<Coords> > m_black_tiles;
+    std::shared_ptr< std::set<std::pair<Coords, RGB> > > m_colored_tiles;
+
+    int m_cell_size;
+
+    void draw_grid();
 };
 
 

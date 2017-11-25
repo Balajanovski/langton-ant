@@ -8,8 +8,10 @@
 #include <vector>
 #include <set>
 #include <memory>
+#include <utility>
 
 #include "Util/Coords.h"
+#include "Util/RGB.h"
 
 enum class TileState {
     WHITE = 0,
@@ -25,13 +27,13 @@ private:
     std::vector< std::vector<TileState> > m_field_mem;
 
     // A set representing all black tiles to make lookup more efficient
-    std::shared_ptr< std::set<Coords> > m_black_tiles;
+    std::shared_ptr< std::set< std::pair<Coords, RGB> > > m_colored_tiles;
 
 public:
 
-    Field(int width, int height, std::shared_ptr< std::set<Coords> > black_tiles);
+    Field(int width, int height, std::shared_ptr< std::set< std::pair<Coords, RGB> > > colored_tiles);
 
-    void flip_tile(const Coords& c);
+    void flip_tile(const std::pair<Coords, RGB>& c);
 
     TileState get_tile(const Coords& c) const;
 

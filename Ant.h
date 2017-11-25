@@ -6,6 +6,7 @@
 
 #include "Util/Coords.h"
 #include "Field.h"
+#include "Util/RGB.h"
 
 // Set as regular enum instead of enum class so some trickery
 // can be undertaken when rotating
@@ -26,15 +27,20 @@ private:
     // Gets the block the Ant is standing on
     TileState get_block_on(std::shared_ptr<Field> field);
 
+    RGB m_ant_color;
+
 public:
 
     // Potential SEGFAULT here
 
     Ant(Coords coords);
 
-
     Coords get_coords() const {
         return m_ant_coords;
+    }
+
+    RGB get_color() const {
+        return m_ant_color;
     }
 
     void rotate_left();

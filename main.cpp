@@ -1,18 +1,17 @@
 #include <iostream>
-#include <set>
-#include <memory>
+#include <stdexcept>
 
 #include "Field.h"
 #include "Application.h"
 
 int main(int argc, char *argv[]) {
 
-    Application app(100, 100, 1);
-    app.begin();
+    if (argc < 4) {
+        throw std::runtime_error("fatal error: not enough arguments input");
+    }
 
-    //Field field(100, 100, std::make_shared< std::set<Coords> >() );
-    //field.flip_tile({10, 10});
-    //std::cout << field.get_field_width() << " " << field.get_field_height() << std::endl;
+    Application app(atoi(argv[1]), atoi(argv[2]), atoi(argv[3]), atoi(argv[4]));
+    app.begin();
 
 
 

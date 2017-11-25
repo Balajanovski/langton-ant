@@ -6,9 +6,9 @@
 
 #include "Application.h"
 
-Application::Application(int width, int height, int ant_number) : m_drawer(width, height, m_black_tiles),
-                                                                  m_field(std::make_shared<Field>(width, height, m_black_tiles)),
-                                                                  m_black_tiles(std::make_shared< std::set<Coords> >())
+Application::Application(int width, int height, int cell_size, int ant_number) : m_drawer(width, height, cell_size, m_colored_tiles),
+                                                                  m_field(std::make_shared<Field>(width, height, m_colored_tiles)),
+                                                                  m_colored_tiles(std::make_shared< std::set< std::pair<Coords, RGB> > >())
 {
     m_manager = AntManager(m_field);
     m_manager.generate_ants(ant_number);

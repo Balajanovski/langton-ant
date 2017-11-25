@@ -67,4 +67,7 @@ void Ant::move(int width, int height) {
 
 Ant::Ant(Coords coords) : m_ant_coords(coords) {
     m_direction = static_cast<AntDirection>(RandomNumberGen::rng(0, 3));
+    m_ant_color = {static_cast<unsigned char>(RandomNumberGen::rng(0, 255)),
+                   static_cast<unsigned char>(RandomNumberGen::rng(0, 255)),
+                   static_cast<unsigned char>(RandomNumberGen::rng(0, 255))};
 }

@@ -12,6 +12,7 @@
 #include "Field.h"
 #include "Drawer.h"
 #include "Util/Coords.h"
+#include "Util/RGB.h"
 
 enum class ApplicationState {
         PAUSED      = 0,
@@ -28,7 +29,7 @@ private:
     // - Field class, which adds turned on tiles to the set, and removes turned off tiles
     // - Drawer class, which draws turned on tiles
 
-    std::shared_ptr< std::set<Coords> > m_black_tiles;
+    std::shared_ptr< std::set< std::pair<Coords, RGB> > > m_colored_tiles;
 
     AntManager m_manager;
     std::shared_ptr<Field> m_field;
@@ -41,7 +42,7 @@ private:
 
 
 public:
-    Application(int width, int height, int ant_number);
+    Application(int width, int height, int cell_size, int ant_number);
 
     void begin();
     void end();

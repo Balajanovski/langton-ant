@@ -8,6 +8,7 @@
 #include "Field.h"
 #include "Ant.h"
 
+#include <thread>
 #include <vector>
 #include <memory>
 
