@@ -18,7 +18,7 @@ private:
 
     std::shared_ptr<Field> m_field;
 
-    TileState get_block_on(const Ant& ant);
+    TileDirection get_block_on(const Ant& ant);
 
     void move_ant(Ant& ant);
 public:

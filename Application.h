@@ -7,10 +7,12 @@
 
 #include <memory>
 #include <set>
+#include <string>
 
 #include "AntManager.h"
 #include "Field.h"
 #include "Drawer.h"
+#include "ConfigManager.h"
 #include "Util/Coords.h"
 #include "Util/RGB.h"
 
@@ -33,7 +35,7 @@ private:
 
     AntManager m_manager;
     std::shared_ptr<Field> m_field;
-    Drawer m_drawer;
+    std::shared_ptr<Drawer> m_drawer;
 
 
     void check_keyboard_events();
@@ -42,7 +44,7 @@ private:
 
 
 public:
-    Application(int width, int height, int cell_size, int ant_number);
+    Application(const std::string& config_path);
 
     void begin();
     void end();

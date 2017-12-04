@@ -6,7 +6,6 @@
 
 #include "Util/Coords.h"
 #include "Field.h"
-#include "Util/RGB.h"
 
 // Set as regular enum instead of enum class so some trickery
 // can be undertaken when rotating
@@ -25,15 +24,13 @@ private:
     AntDirection m_direction;
 
     // Gets the block the Ant is standing on
-    TileState get_block_on(std::shared_ptr<Field> field);
+    TileDirection get_block_on(std::shared_ptr<Field> field);
 
     RGB m_ant_color;
 
 public:
 
-    // Potential SEGFAULT here
-
-    Ant(Coords coords);
+    Ant(const Coords& coords);
 
     Coords get_coords() const {
         return m_ant_coords;
@@ -49,6 +46,8 @@ public:
 
     // Moves the ant forward one unit based on its direction
     void move(int width, int height);
+
+    void set_color(const RGB& color);
 };
 
 #endif //LANGTON_ANT_H

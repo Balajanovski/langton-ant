@@ -2,16 +2,22 @@
 // Created by Balajanovski on 18/11/2017.
 //
 
+#include <string>
+
 #include "Util/GetSDL.h"
 
 #include "Application.h"
+#include "ConfigManager.h"
 
-Application::Application(int width, int height, int cell_size, int ant_number) : m_drawer(width, height, cell_size, m_colored_tiles),
-                                                                  m_field(std::make_shared<Field>(width, height, m_colored_tiles)),
-                                                                  m_colored_tiles(std::make_shared< std::set< std::pair<Coords, RGB> > >())
+Application::Application(const std::string& config_path)
 {
+    ConfigManager::instance().load_file(config_path);
+    m_colored_tiles = std::make_shared< std::set< std::pair<Coords, RGB> > >();
+    m_drawer = std::make_shared<Drawer>(ConfigManager::instance().get_width(), ConfigManager::instance().get_height(), ConfigManager::instance().get_cell_size(), m_colored_tiles);
+    m_field = std::make_shared<Field>(ConfigManager::instance().get_width(), ConfigManager::instance().get_height(), m_colored_tiles);
+
     m_manager = AntManager(m_field);
-    m_manager.generate_ants(ant_number);
+    m_manager.generate_ants(ConfigManager::instance().get_ant_number());
 }
 
 void Application::check_keyboard_events() {
@@ -67,7 +73,7 @@ void Application::begin() {
 
 
 
-        m_drawer.flush();
+        m_drawer->flush();
     }
 
 }

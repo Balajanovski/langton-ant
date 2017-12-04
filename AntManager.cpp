@@ -27,7 +27,7 @@ void AntManager::generate_ants(int number) {
     }
 }
 
-TileState AntManager::get_block_on(const Ant& ant) {
+TileDirection AntManager::get_block_on(const Ant& ant) {
     return m_field->get_tile(ant.get_coords());
 }
 
@@ -35,17 +35,21 @@ void AntManager::move_ant(Ant &ant) {
     auto block_on = get_block_on(ant);
 
     switch(block_on) {
-        case TileState::WHITE:
+        case TileDirection::TURN_RIGHT:
         {
             ant.rotate_right();
+
             m_field->flip_tile(std::make_pair(ant.get_coords(), ant.get_color()));
+
             ant.move(m_field->get_field_width(), m_field->get_field_height());
         }
             break;
-        case TileState::BLACK:
+        case TileDirection::TURN_LEFT:
         {
             ant.rotate_left();
+
             m_field->flip_tile(std::make_pair(ant.get_coords(), ant.get_color()));
+
             ant.move(m_field->get_field_width(), m_field->get_field_height());
         }
             break;

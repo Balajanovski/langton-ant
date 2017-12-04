@@ -1,8 +1,9 @@
 #include "Ant.h"
 #include "Field.h"
 #include "Util/RandomNumberGen.h"
+#include "ConfigManager.h"
 
-TileState Ant::get_block_on(std::shared_ptr<Field> field) {
+TileDirection Ant::get_block_on(std::shared_ptr<Field> field) {
     return field->get_tile(m_ant_coords);
 }
 
@@ -65,9 +66,22 @@ void Ant::move(int width, int height) {
     }
 }
 
-Ant::Ant(Coords coords) : m_ant_coords(coords) {
+Ant::Ant(const Coords& coords) : m_ant_coords(coords) {
     m_direction = static_cast<AntDirection>(RandomNumberGen::rng(0, 3));
-    m_ant_color = {static_cast<unsigned char>(RandomNumberGen::rng(0, 255)),
+
+    if (ConfigManager::instance().are_colors_machine_generated()) {
+        set_color({static_cast<unsigned char>(RandomNumberGen::rng(0, 255)),
                    static_cast<unsigned char>(RandomNumberGen::rng(0, 255)),
-                   static_cast<unsigned char>(RandomNumberGen::rng(0, 255))};
+                   static_cast<unsigned char>(RandomNumberGen::rng(0, 255))});
+    }
+    else {
+        auto custom_colors = ConfigManager::instance().get_custom_colors();
+
+        // Select a random color from custom colors
+        set_color(custom_colors[RandomNumberGen::rng(0, custom_colors.size() - 1)]);
+    }
+}
+
+void Ant::set_color(const RGB& color) {
+    m_ant_color = color;
 }

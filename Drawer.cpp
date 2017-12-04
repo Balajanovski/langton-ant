@@ -1,6 +1,7 @@
 #include "Drawer.h"
 #include "Util/Coords.h"
 #include "Util/RGB.h"
+#include "ConfigManager.h"
 
 #include <string>
 #include <stdexcept>
@@ -27,8 +28,10 @@ Drawer::Drawer(int field_width, int field_height, int cell_size, std::shared_ptr
 }
 
 void Drawer::flush() {
-    // Draw white background
-    SDL_SetRenderDrawColor(renderer.get(), 255, 255, 255, SDL_ALPHA_OPAQUE);
+    auto background_color = ConfigManager::instance().get_background_color();
+
+    // Draw background
+    SDL_SetRenderDrawColor(renderer.get(), background_color.r, background_color.g, background_color.b, SDL_ALPHA_OPAQUE);
     SDL_RenderClear(renderer.get());
 
     // Draw the cells from the buffer

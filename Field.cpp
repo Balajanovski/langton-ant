@@ -13,26 +13,28 @@ Field::Field(int width, int height, std::shared_ptr< std::set< std::pair<Coords,
                                                                                                            m_width(width),
                                                                                                            m_height(height),
                                                                                                            m_colored_tiles(colored_tiles) {
-    // Create "template" row of only white tiles to fill up the memory
-    std::vector<TileState> white_row(width);
-    std::fill_n(white_row.begin(), width, TileState::WHITE);
+    // Create "template" row of only background tiles to fill up the memory
+    std::vector<TileDirection> white_row(width);
+    std::fill_n(white_row.begin(), width, TileDirection::TURN_RIGHT);
 
-    // Fill up the memory with white rows
+    // Fill up the memory with background rows
     std::fill_n(m_field_mem.begin(), height, white_row);
 }
 
 void Field::flip_tile(const std::pair<Coords, RGB> &c) {
+
+
     switch(m_field_mem[c.first.y][c.first.x]) {
-        case TileState::WHITE:
+        case TileDirection::TURN_RIGHT:
         {
-            m_field_mem[c.first.y][c.first.x] = TileState::BLACK;
             m_colored_tiles->insert(c);
+            m_field_mem[c.first.y][c.first.x] = TileDirection::TURN_LEFT;
         }
             break;
-        case TileState::BLACK:
+        case TileDirection::TURN_LEFT:
         {
-            m_field_mem[c.first.y][c.first.x] = TileState::WHITE;
             m_colored_tiles->erase(c);
+            m_field_mem[c.first.y][c.first.x] = TileDirection::TURN_RIGHT;
         }
             break;
         default:
@@ -43,7 +45,7 @@ void Field::flip_tile(const std::pair<Coords, RGB> &c) {
     }
 }
 
-TileState Field::get_tile(const Coords& c) const {
+TileDirection Field::get_tile(const Coords& c) const {
     return m_field_mem[c.y][c.x];
 }
 
