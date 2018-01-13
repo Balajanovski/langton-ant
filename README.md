@@ -8,6 +8,7 @@ https://en.wikipedia.org/wiki/Langton%27s_ant
 
 ## Dependencies
 * SDL2
+* yaml-cpp
 * CMake
 
 ## Usage guide
@@ -15,8 +16,7 @@ https://en.wikipedia.org/wiki/Langton%27s_ant
 2. Enter the reposity by typing `cd langton-ant`
 3. Generate a makefile by typing `cmake .`
 4. Build the project by typing `make`
-5. Run it by typing `./langton [width] [height] [cell_size_in_px] [num_of_ants]` where the values in the square brackets are replaced by the values of your choosing
+5. Run it by typing `./langton`. This will open the application with the settings in `Config/config.yaml`
 
 ## Planned features
-* Config file
 * Multi-threading
