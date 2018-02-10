@@ -17,6 +17,3 @@ https://en.wikipedia.org/wiki/Langton%27s_ant
 3. Generate a makefile by typing `cmake .`
 4. Build the project by typing `make`
 5. Run it by typing `./langton`. This will open the application with the settings in `Config/config.yaml`
-
-## Planned features
-* Multi-threading
