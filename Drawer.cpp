@@ -7,7 +7,7 @@
 #include <stdexcept>
 #include <utility>
 
-Drawer::Drawer(int field_width, int field_height, int cell_size, std::shared_ptr< std::set< std::pair<Coords, RGB> > > colored_tiles)
+Drawer::Drawer(int field_width, int field_height, int cell_size, std::shared_ptr< std::unordered_set< Tile > > colored_tiles)
         : SdlHandle(SDL_INIT_EVERYTHING),
           width(field_width),
           height(field_height),
@@ -39,14 +39,15 @@ void Drawer::flush() {
     draw_dst.w = draw_dst.h = m_cell_size;
 
     if (m_colored_tiles != nullptr) {
-        for (auto& coord : *m_colored_tiles) {
-            SDL_SetRenderDrawColor(renderer.get(), coord.second.r,
-                                   coord.second.g,
-                                   coord.second.b,
+        for (const auto& tile : *m_colored_tiles) {
+            SDL_SetRenderDrawColor(renderer.get(),
+                                   tile.color.r,
+                                   tile.color.g,
+                                   tile.color.b,
                                    SDL_ALPHA_OPAQUE);
 
-            draw_dst.x = coord.first.x * m_cell_size;
-            draw_dst.y = coord.first.y * m_cell_size;
+            draw_dst.x = tile.pos.x * m_cell_size;
+            draw_dst.y = tile.pos.y * m_cell_size;
 
             SDL_RenderFillRect(renderer.get(), &draw_dst);
         }

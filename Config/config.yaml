@@ -1,7 +1,8 @@
-width: 1000 # width of field in cells
-height: 500 # height of field in cells
-cell-size: 2
-ant-number: 200
+width: 1000         # width of field in cells
+height: 500         # height of field in cells
+cell-size: 2        # size of each cell in pixels
+ant-number: 100     # no. of ants
+thread-number: 10   # no. of threads
 
 background-color: {R: 255, G: 255, B: 255}
 

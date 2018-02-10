@@ -12,7 +12,7 @@
 Application::Application(const std::string& config_path)
 {
     ConfigManager::instance().load_file(config_path);
-    m_colored_tiles = std::make_shared< std::set< std::pair<Coords, RGB> > >();
+    m_colored_tiles = std::make_shared< std::unordered_set< Tile > >();
     m_drawer = std::make_shared<Drawer>(ConfigManager::instance().get_width(), ConfigManager::instance().get_height(), ConfigManager::instance().get_cell_size(), m_colored_tiles);
     m_field = std::make_shared<Field>(ConfigManager::instance().get_width(), ConfigManager::instance().get_height(), m_colored_tiles);
 

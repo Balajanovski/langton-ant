@@ -8,9 +8,9 @@
 #include "Field.h"
 #include "Ant.h"
 
-#include <thread>
 #include <vector>
 #include <memory>
+#include <mutex>
 
 class AntManager {
 private:
@@ -18,8 +18,13 @@ private:
 
     std::shared_ptr<Field> m_field;
 
+    size_t m_thread_num;
+
+    static std::mutex m_mutex;
+
     TileDirection get_block_on(const Ant& ant);
 
+    void move_ants(int start_index, int end_index);
     void move_ant(Ant& ant);
 public:
     AntManager(std::shared_ptr<Field> field);

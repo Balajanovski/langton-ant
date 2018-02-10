@@ -22,9 +22,15 @@ void ConfigManager::load_file(const std::string& config_path) {
 
     m_width = m_config["width"].as<int>();
     m_height = m_config["height"].as<int>();
+
     m_cell_size = m_config["cell-size"].as<int>();
+
     m_ant_number = m_config["ant-number"].as<int>();
+
+    m_thread_number = m_config["thread-number"].as<size_t>();
+
     m_background_color = m_config["background-color"].as<RGB>();
+
     m_machine_generated_colors = m_config["machine-generated-colors"].as<bool>();
 
     if (!m_machine_generated_colors) {

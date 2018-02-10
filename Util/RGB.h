@@ -14,6 +14,7 @@ struct RGB {
 };
 
 bool operator<(const RGB& a, const RGB& b);
+bool operator==(const RGB& a, const RGB& b);
 
 namespace YAML {
     template<>

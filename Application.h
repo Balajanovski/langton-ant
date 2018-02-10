@@ -6,15 +6,14 @@
 #define LANGTON_APPLICATION_H
 
 #include <memory>
-#include <set>
+#include <unordered_set>
 #include <string>
 
 #include "AntManager.h"
 #include "Field.h"
 #include "Drawer.h"
 #include "ConfigManager.h"
-#include "Util/Coords.h"
-#include "Util/RGB.h"
+#include "Util/Tile.h"
 
 enum class ApplicationState {
         PAUSED      = 0,
@@ -31,7 +30,7 @@ private:
     // - Field class, which adds turned on tiles to the set, and removes turned off tiles
     // - Drawer class, which draws turned on tiles
 
-    std::shared_ptr< std::set< std::pair<Coords, RGB> > > m_colored_tiles;
+    std::shared_ptr< std::unordered_set< Tile > > m_colored_tiles;
 
     AntManager m_manager;
     std::shared_ptr<Field> m_field;

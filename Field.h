@@ -6,13 +6,14 @@
 #define LANGTON_FIELD_H
 
 #include <vector>
-#include <set>
+#include <unordered_set>
 #include <memory>
 #include <utility>
 
 #include "Util/Coords.h"
 #include "Util/TileDirection.h"
 #include "Util/RGB.h"
+#include "Util/Tile.h"
 
 class Field {
 private:
@@ -23,13 +24,13 @@ private:
     std::vector< std::vector<TileDirection> > m_field_mem;
 
     // A set representing all colored tiles to make lookup more efficient
-    std::shared_ptr< std::set< std::pair<Coords, RGB> > > m_colored_tiles;
+    std::shared_ptr< std::unordered_set< Tile > > m_colored_tiles;
 
 public:
 
-    Field(int width, int height, std::shared_ptr< std::set< std::pair<Coords, RGB> > > colored_tiles);
+    Field(int width, int height, std::shared_ptr< std::unordered_set< Tile > > colored_tiles);
 
-    void flip_tile(const std::pair<Coords, RGB>& c);
+    void flip_tile(const Tile& c);
 
     TileDirection get_tile(const Coords& c) const;
 
