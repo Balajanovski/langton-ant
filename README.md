@@ -1,6 +1,6 @@
 # langton-ant
 
-[![Screen_Shot_2018-01-13_at_8.18.53_PM.png](https://s18.postimg.org/bq86gcouh/Screen_Shot_2018-01-13_at_8.18.53_PM.png)](https://postimg.org/image/n2kry4xj9/)
+![Screenshot of program in action](https://raw.githubusercontent.com/Balajanovski/langton-ant/master/screenshot.png)
 
 A simple implementation of Langton's ant
 Information about the rules of the cellular automata can be found by following this link:
