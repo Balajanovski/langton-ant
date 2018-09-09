@@ -2,8 +2,8 @@
 
 ![Screenshot of program in action](https://raw.githubusercontent.com/Balajanovski/langton-ant/master/screenshot.png)
 
-A simple implementation of Langton's ant
-Information about the rules of the cellular automata can be found by following this link:
+A simple implementation of Langton's ant.<br>
+Information about the rules of the cellular automata can be found by following this link:<br>
 https://en.wikipedia.org/wiki/Langton%27s_ant
 
 ## Dependencies
